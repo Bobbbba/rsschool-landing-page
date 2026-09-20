@@ -1,0 +1,74 @@
+@use 'variables' as *;
+@use 'mixins' as *;
+
+.footer {
+  margin: 40px 20px;
+  background: $color-footer;
+  color: $color-white;
+  border-radius: $radius-lg;
+  padding: 100px 60px;
+
+  &__inner {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 60px;
+    align-items: center;
+  }
+
+  &__slogan {
+    font-size: $fs-h2;
+    font-weight: $fw-semibold;
+    line-height: 1.05;
+    margin-bottom: 40px;
+    color: $color-white;
+    em { color: $color-accent; }
+  }
+
+  &__socials {
+    display: flex;
+    gap: 12px;
+
+    a {
+      width: 44px;
+      height: 44px;
+      border: 1px solid rgba(255,255,255,.5);
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      transition: background .2s, border-color .2s;
+      &:hover { background: rgba(255,255,255,.1); border-color: $color-white; }
+    }
+  }
+
+  &__title { font-size: 20px; font-weight: $fw-semibold; margin-bottom: 24px; }
+
+  &__list li {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    margin-bottom: 16px;
+    font-size: $fs-body;
+    color: rgba(255,255,255,.9);
+    a:hover { color: $color-accent; }
+  }
+
+  @include tablet {
+    margin: 32px 24px;
+    padding: 60px 40px;
+    border-radius: 32px;
+
+    &__inner { grid-template-columns: 1fr; gap: 40px; }
+  }
+
+  @include mobile {
+    margin: 24px 16px;
+    padding: 40px 24px;
+    border-radius: 24px;
+
+    &__slogan { font-size: 26px; margin-bottom: 24px; }
+    &__socials a { width: 40px; height: 40px; }
+    &__title { font-size: 18px; }
+    &__list li { font-size: 14px; }
+  }
+}

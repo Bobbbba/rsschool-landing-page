@@ -1,0 +1,113 @@
+@use 'variables' as *;
+@use 'mixins' as *;
+
+// ==========================================================
+// About — заголовок + галерея из 4 фото
+// ==========================================================
+.about {
+  padding: 100px 0;
+
+  // ---------- Заголовок ----------
+  &__title {
+    font-size: clamp(24px, 3.6vw, 52px);
+    font-weight: $fw-semibold;
+    line-height: 1.2;
+    letter-spacing: -0.01em;
+    color: $color-text;
+    margin-bottom: 60px;
+    max-width: 1180px;
+
+    em {
+      font-style: italic;
+      font-weight: $fw-medium;
+      color: $color-accent;
+    }
+  }
+
+  // ---------- Галерея: две вертикальные колонки ----------
+  &__gallery {
+    display: flex;
+    gap: 40px;
+    align-items: flex-start;
+  }
+
+  &__col {
+    flex: 1 1 0;                     // обе колонки равной ширины
+    display: flex;
+    flex-direction: column;
+    gap: 40px;                        // отступ между фото внутри колонки
+    min-width: 0;                     // фикс для flex + overflow
+  }
+
+  // ---------- Картинки ----------
+  &__img {
+    display: block;
+    width: 100%;
+    height: auto;
+    object-fit: cover;
+    object-position: center;
+    border-radius: $radius-md;        // 16px
+    background-color: rgba($color-text, .05);
+
+    // Вертикальные фото (1 и 3)
+    &--tall {
+      aspect-ratio: 660 / 590;
+    }
+
+    // Горизонтальные фото (2 и 4)
+    &--wide {
+      aspect-ratio: 660 / 430;
+    }
+  }
+
+  // ==========================================================
+  // Планшет (≤767px)
+  // ==========================================================
+  @include tablet {
+    padding: 70px 0;
+
+    &__title {
+      margin-bottom: 40px;
+    }
+
+    &__gallery {
+      gap: 24px;
+    }
+
+    &__col {
+      gap: 24px;
+    }
+  }
+
+  // ==========================================================
+  // Мобильный (≤379px)
+  // ==========================================================
+  @include mobile {
+    padding: 50px 0;
+
+    &__title {
+      font-size: 22px;
+      line-height: 1.3;
+      margin-bottom: 28px;
+    }
+
+    // одна колонка — все 4 фото друг под другом
+    &__gallery {
+      flex-direction: column;
+      gap: 16px;
+    }
+
+    &__col {
+      flex: none;
+      width: 100%;
+      gap: 16px;
+    }
+
+    // на мобиле пропорции можно оставить как есть
+    // или выровнять под 4:3 — по вкусу
+    &__img {
+      &--tall { aspect-ratio: 660 / 590; }
+      &--wide { aspect-ratio: 660 / 430; }
+    }
+  }
+}

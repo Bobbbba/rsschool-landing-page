@@ -1,0 +1,34 @@
+// ===== Цвета =====
+$color-bg:      #E1D4C9;
+$color-text:    #403F3D;
+$color-footer:  #665F55;
+$color-accent:  #B0907A;
+$color-white:   #FFFFFF;
+$color-border:  rgba(64, 63, 61, .25);
+
+// ===== Типографика =====
+$font-main: 'Inter', system-ui, sans-serif;
+
+$fw-regular:  400;
+$fw-medium:   500;
+$fw-semibold: 600;
+
+// Плавные размеры через clamp(min, fluid, max)
+$fs-h1:   clamp(32px, 5vw, 72px);
+$fs-h2:   clamp(28px, 4.2vw, 60px);
+$fs-h3:   clamp(20px, 1.7vw, 24px);
+$fs-body: clamp(14px, 1.1vw, 16px);
+$fs-small: 14px;
+
+// ===== Контейнер =====
+$container-max: 1440px;
+$container-pad: 40px;   // на 768 → 24px, на 380 → 16px
+
+// ===== Радиусы =====
+$radius-lg:   40px;
+$radius-md:   16px;
+$radius-pill: 100px;
+
+// ===== Брейкпоинты =====
+$bp-tablet: 768px;
+$bp-mobile: 380px;
