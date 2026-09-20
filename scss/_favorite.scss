@@ -1,0 +1,231 @@
+@use 'variables' as *;
+@use 'mixins' as *;
+
+// ==========================================================
+// Секция "Choose your favorite coffee"
+// ==========================================================
+.favorite {
+  padding: 100px 0 80px;
+
+  &__title {
+    text-align: center;
+    font-size: $fs-h2;
+    font-weight: $fw-semibold;
+    line-height: 1.1;
+    letter-spacing: -0.01em;
+    color: $color-text;
+    margin: 0 auto 60px;
+    max-width: 720px;
+
+    // Акцентное слово "favorite" — курсив, цвет $color-accent
+    em {
+      font-style: italic;
+      font-weight: $fw-medium;
+      color: $color-accent;
+    }
+  }
+
+  // ===== Планшет (≤767px) =====
+  @include tablet {
+    padding: 70px 0 60px;
+
+    &__title {
+      margin-bottom: 40px;
+      max-width: 560px;
+    }
+  }
+
+  // ===== Мобильный (≤379px) =====
+  @include mobile {
+    padding: 50px 0 44px;
+
+    &__title {
+      margin-bottom: 28px;
+      max-width: 100%;
+    }
+  }
+}
+
+// ==========================================================
+// Слайдер — вынесем стили в _slider.scss, но если он
+// используется только внутри .favorite, можно оставить здесь
+// ==========================================================
+.slider {
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 40px;
+  padding-bottom: 70px; // место под .slider__dots
+
+  &__viewport {
+    flex: 1 1 auto;
+    overflow: hidden;
+    min-width: 0; // фикс для flex-контейнера с overflow
+  }
+
+  &__track {
+    display: flex;
+    transition: transform .45s cubic-bezier(.4, 0, .2, 1);
+    will-change: transform;
+  }
+
+  &__slide {
+    flex: 0 0 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+    padding: 0 20px;
+  }
+
+  &__img {
+    width: 320px;
+    height: 440px;
+    object-fit: contain;
+    margin-bottom: 24px;
+    user-select: none;
+    pointer-events: none; // чтобы свайп не выделял картинку
+  }
+
+  &__name {
+    font-size: $fs-h3;
+    font-weight: $fw-semibold;
+    color: $color-text;
+    margin-bottom: 12px;
+  }
+
+  &__desc {
+    max-width: 460px;
+    font-size: $fs-body;
+    line-height: 1.45;
+    color: $color-accent; // в макете описание серо-коричневое
+    margin-bottom: 16px;
+  }
+
+  &__price {
+    font-size: $fs-h3;
+    font-weight: $fw-semibold;
+    color: $color-text;
+  }
+
+  // ---------- Кнопки стрелок ----------
+  &__btn {
+    flex: 0 0 auto;
+    width: 48px;
+    height: 48px;
+    border-radius: 50%;
+    border: 1px solid $color-border;
+    background: transparent;
+    color: $color-text;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    transition: background .2s ease, color .2s ease, border-color .2s ease;
+
+    svg { display: block; }
+
+    &:hover {
+      background: $color-text;
+      color: $color-bg;
+      border-color: $color-text;
+    }
+
+    &:focus-visible {
+      outline: 2px solid $color-accent;
+      outline-offset: 2px;
+    }
+  }
+
+  // ---------- Индикаторы (полоски) ----------
+  &__dots {
+    position: absolute;
+    left: 50%;
+    bottom: 0;
+    transform: translateX(-50%);
+    display: flex;
+    gap: 10px;
+  }
+
+  &__dot {
+    display: block;
+    width: 40px;
+    height: 4px;
+    padding: 0;
+    border: none;
+    background: rgba($color-text, .25);
+    border-radius: 2px;
+    cursor: pointer;
+    transition: background .2s ease;
+
+    &.is-active { background: $color-text; }
+
+    &:focus-visible {
+      outline: 2px solid $color-accent;
+      outline-offset: 2px;
+    }
+  }
+
+  // ===== Планшет (≤767px) =====
+  @include tablet {
+    gap: 16px;
+    padding-bottom: 60px;
+
+    &__btn {
+      width: 40px;
+      height: 40px;
+
+      svg { width: 16px; height: 16px; }
+    }
+
+    &__img {
+      width: 260px;
+      height: 340px;
+      margin-bottom: 20px;
+    }
+
+    &__desc { max-width: 380px; }
+
+    &__dots { gap: 8px; }
+    &__dot  { width: 32px; }
+  }
+
+  // ===== Мобильный (≤379px) =====
+  @include mobile {
+    gap: 8px;
+    padding-bottom: 48px;
+
+    &__slide { padding: 0 8px; }
+
+    &__btn {
+      width: 36px;
+      height: 36px;
+
+      svg { width: 14px; height: 14px; }
+    }
+
+    &__img {
+      width: 200px;
+      height: 260px;
+      margin-bottom: 16px;
+    }
+
+    &__name {
+      font-size: 18px;
+      margin-bottom: 8px;
+    }
+
+    &__desc {
+      font-size: 13px;
+      line-height: 1.4;
+      margin-bottom: 12px;
+      max-width: 100%;
+    }
+
+    &__price { font-size: 18px; }
+
+    &__dots { gap: 6px; }
+    &__dot  { width: 24px; height: 3px; }
+  }
+}
