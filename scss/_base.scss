@@ -3,9 +3,13 @@
 
 *,
 *::before,
-*::after { box-sizing: border-box; }
+*::after {
+  box-sizing: border-box;
+}
 
-html { scroll-behavior: smooth; }
+html {
+  scroll-behavior: smooth;
+}
 
 body {
   margin: 0;
@@ -15,7 +19,24 @@ body {
   color: $color-text;
   background-color: $color-bg;
   -webkit-font-smoothing: antialiased;
-  overflow-x: hidden;           // защита от горизонтального скролла
+  overflow-x: hidden;
+
+  // плавная смена темы
+  transition: background-color .3s ease, color .3s ease;
+}
+
+// Плавные переходы для всех ключевых элементов
+.header,
+.footer,
+.menu-card,
+.nav__link,
+.header__logo,
+.store-btn,
+.hero__btn,
+.slider__btn,
+.slider__dot,
+.theme-toggle {
+  transition: background-color .3s ease, color .3s ease, border-color .3s ease;
 }
 
 img { max-width: 100%; height: auto; display: block; }
@@ -30,9 +51,10 @@ em {
   color: $color-accent;
 }
 
-.container { @include container; }
+.container {
+  @include container;
+}
 
-// Глобально уменьшаем padding контейнера на планшете и мобилке
 @include tablet {
   .container { padding: 0 24px; }
 }
