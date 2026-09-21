@@ -10,7 +10,8 @@
   --color-card-bg:   transparent;
   --color-btn-bg:    #FFFFFF;
   --color-btn-text:  #403F3D;
-  --color-card-border: rgba(64, 63, 61, .15);   // светлая тема
+  --color-card-border: rgba(64, 63, 61, .15);  
+  --slider-dot-bg: rgba(64, 63, 61, .25);
 
   // Фон hero-оверлея (градиент)
   --hero-overlay:    rgba(0, 0, 0, .75);
@@ -20,7 +21,7 @@
 }
 
 [data-theme="dark"] {
-  --color-bg:        #403F3D;   // фон страницы — тёмный
+  --color-bg:        #292826;   // фон страницы — тёмный
   --color-text:      #E1D4C9;   // основной текст — светлый
   --color-footer:    #665F55;   // футер оставляем (или можно затемнить)
   --color-accent:    #B0907A;   // акцент — тот же
@@ -30,6 +31,7 @@
   --color-btn-bg:    #E1D4C9;
   --color-btn-text:  #403F3D;
   --color-card-border: rgba(225, 212, 201, .2); // тёмная тема
+  --slider-dot-bg: rgba(225, 212, 201, .3);
 
   --hero-overlay:    rgba(0, 0, 0, .55);
 
@@ -47,6 +49,7 @@ $color-card-bg:  var(--color-card-bg);
 $color-btn-bg:   var(--color-btn-bg);
 $color-btn-text: var(--color-btn-text);
 $color-card-border: var(--color-card-border);
+$slider-dot-bg:  var(--slider-dot-bg);
 
 // Остальное — без изменений
 $font-main: 'Inter', system-ui, sans-serif;
