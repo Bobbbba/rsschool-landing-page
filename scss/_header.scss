@@ -1,0 +1,321 @@
+@use 'variables' as *;
+@use 'mixins' as *;
+
+// ==========================================================
+// Header
+// ==========================================================
+.header {
+  position: sticky;
+  top: 0;
+  z-index: 100;
+  background: $color-bg;
+  padding: 20px 0;
+
+  &__container {
+    @include container;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 40px;
+  }
+
+  // ---------- Логотип ----------
+  // ---------- Логотип ----------
+&__logo {
+  position: relative;
+  display: inline-flex;
+  flex-direction: column;
+  align-items: center;
+  line-height: 1;
+  flex-shrink: 0;
+  color: $color-text;
+  text-decoration: none;
+  padding: 4px 12px;
+
+  // Круг-подложка
+  &::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    right: 54px;
+    width: 42px;
+    height: 42px;
+    background: $color-accent;      // #B0907A
+    border-radius: 50%;
+    z-index: 0;
+  }
+}
+
+// Курсивное "Resource"
+&__logo-name {
+  position: relative;
+  z-index: 1;
+  font-size: 26px;
+  font-weight: 600;
+  font-style: italic;
+  letter-spacing: -0.02em;
+  color: $color-text;
+}
+
+// "COFFEE HOUSE" — мелкая подпись с разрядкой
+&__logo-sub {
+  position: relative;
+  z-index: 1;
+  margin-top: 6px;
+  font-size: 10px;
+  font-weight: 500;
+  letter-spacing: .18em;
+  text-transform: uppercase;
+  color: $color-text;
+}
+
+  // ---------- Правые действия ----------
+  &__actions {
+    display: flex;
+    align-items: center;
+    gap: 20px;
+    flex-shrink: 0;
+  }
+
+  // ---------- Кнопка "Menu" ----------
+  &__menu-btn {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    font-size: 15px;
+    font-weight: $fw-medium;
+    color: $color-text;
+    transition: color .2s ease;
+
+    &:hover { color: $color-accent; }
+
+    &:focus-visible {
+      outline: 2px solid $color-accent;
+      outline-offset: 4px;
+      border-radius: 4px;
+    }
+  }
+
+  &__menu-icon {
+    display: block;
+    flex-shrink: 0;
+    transition: transform .3s ease;
+  }
+
+  // Тексты кнопки (Menu / Close)
+  &__menu-text {
+    &--close { display: none; }
+  }
+
+  // Открытое состояние кнопки
+  &__menu-btn[aria-expanded="true"] {
+    color: $color-accent;
+
+    .header__menu-text--open  { display: none; }
+    .header__menu-text--close { display: inline; }
+    .header__menu-icon        { transform: rotate(90deg); }
+  }
+
+  // ---------- Планшет ----------
+  @include tablet {
+    padding: 16px 0;
+
+    &__logo-name { font-size: 18px; }
+    &__logo-sub  { font-size: 10px; }
+
+    &__actions  { gap: 16px; }
+    &__menu-btn { font-size: 14px; }
+  }
+
+  // ---------- Мобильный ----------
+  @include mobile {
+    padding: 14px 0;
+
+    &__logo-name { font-size: 16px; }
+    &__logo-sub  { font-size: 9px; }
+
+    &__actions  { gap: 12px; }
+
+    &__menu-text { display: none; }              // только иконка
+    &__menu-btn[aria-expanded="true"] {
+      .header__menu-text--close { display: none; } // тоже скрыть "Close"
+    }
+  }
+}
+
+// ==========================================================
+// Навигация .nav
+// ==========================================================
+.nav {
+  // ---------- Desktop (1440) ----------
+  &__list {
+    display: flex;
+    align-items: center;
+    gap: 40px;
+  }
+
+  &__link {
+    font-size: 15px;
+    font-weight: $fw-regular;
+    color: $color-text;
+    position: relative;
+    transition: color .2s ease;
+
+    &::after {
+      content: '';
+      position: absolute;
+      left: 0;
+      bottom: -4px;
+      width: 100%;
+      height: 1px;
+      background: $color-accent;
+      transform: scaleX(0);
+      transform-origin: right;
+      transition: transform .25s ease;
+    }
+
+    &:hover {
+      color: $color-accent;
+      &::after {
+        transform: scaleX(1);
+        transform-origin: left;
+      }
+    }
+
+    &:focus-visible {
+      outline: 2px solid $color-accent;
+      outline-offset: 4px;
+      border-radius: 2px;
+    }
+  }
+
+  // ---------- Планшет (≤767px) — выезжающая панель ----------
+  @include tablet {
+    position: fixed;
+    inset: 0;
+    z-index: 90;
+    background: $color-bg;
+    padding: 120px 32px 40px;
+    transform: translateX(100%);
+    transition: transform .3s ease;
+    overflow-y: auto;
+
+    &__list {
+      flex-direction: column;
+      align-items: flex-start;
+      gap: 28px;
+    }
+
+    &__link {
+      font-size: 22px;
+      font-weight: $fw-medium;
+    }
+
+    &.is-open { transform: translateX(0); }
+  }
+
+  // ---------- Мобильный (≤379px) ----------
+  @include mobile {
+    padding: 100px 20px 32px;
+
+    &__list { gap: 22px; }
+    &__link { font-size: 20px; }
+  }
+}
+
+// ==========================================================
+// Блокировка скролла, когда меню открыто
+// ==========================================================
+body.no-scroll {
+  overflow: hidden;
+
+  @supports (-webkit-touch-callout: none) {
+    position: fixed;
+    width: 100%;
+  }
+}
+// 
+.theme-toggle {
+  display: inline-flex;
+  align-items: center;
+  gap: 0;
+  padding: 0;
+  width: 60px;
+  height: 30px;
+  border: 1px solid rgba($color-text, .25);
+  border-radius: 100px;
+  background: transparent;
+  position: relative;
+  cursor: pointer;
+  transition: border-color .2s ease;
+
+  &:hover { border-color: $color-text; }
+
+  // Тёмный фон-«ползунок» — по центру кнопки
+  &::before {
+    content: '';
+    position: absolute;
+    top: 2px;
+    left: 2px;
+    width: 24px;
+    height: 24px;
+    border-radius: 50%;
+    background: $color-accent;
+    transition: transform .3s ease;
+    z-index: 1;
+  }
+
+  // В тёмной теме ползунок уезжает вправо
+  [data-theme="dark"] &::before {
+    transform: translateX(30px);
+  }
+
+  // Иконки солнце и луна — по бокам
+  &__icons {
+    position: relative;
+    z-index: 2;
+    display: flex;
+    width: 100%;
+    height: 100%;
+    align-items: center;
+    justify-content: space-between;
+    padding: 0 6px;
+    pointer-events: none;
+  }
+
+  &__icon {
+    display: block;
+    width: 16px;
+    height: 16px;
+    transition: color .2s ease, opacity .2s ease;
+  }
+
+  // В светлой теме активна иконка солнца
+  &__icon--sun  { color: $color-bg; opacity: 1; }
+  &__icon--moon { color: $color-text; opacity: .6; }
+
+  [data-theme="dark"] & {
+    .theme-toggle__icon--sun  { color: $color-text; opacity: .6; }
+    .theme-toggle__icon--moon { color: $color-bg;   opacity: 1; }
+  }
+
+  &:focus-visible {
+    outline: 2px solid $color-accent;
+    outline-offset: 4px;
+  }
+
+  @include mobile {
+    width: 50px;
+    height: 26px;
+
+    &::before {
+      width: 20px;
+      height: 20px;
+    }
+    [data-theme="dark"] &::before {
+      transform: translateX(24px);
+    }
+
+    &__icon { width: 14px; height: 14px; }
+  }
+}

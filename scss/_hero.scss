@@ -1,0 +1,178 @@
+@use 'variables' as *;
+@use 'mixins' as *;
+
+// ==========================================================
+// Hero — большая карточка с фото кофе
+// ==========================================================
+.hero {
+  position: relative;
+  margin: 0 20px;                 // отступы от краёв экрана
+  border-radius: $radius-lg;      // 40px
+  overflow: hidden;
+  min-height: 640px;
+  display: flex;
+  align-items: center;
+
+  // Фон — картинка + затемняющий градиент сверху
+  background-image: url('../img/hero-coffee.jpg');
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+
+  // Затемнение слева — для читаемости текста
+  &::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(
+      90deg,
+      rgba(0, 0, 0, .75) 0%,
+      rgba(0, 0, 0, .35) 45%,
+      rgba(0, 0, 0, 0)   75%
+    );
+    z-index: 1;
+  }
+
+  // ---------- Внутренний контент ----------
+  &__inner {
+    position: relative;
+    z-index: 2;
+    max-width: 640px;
+    padding: 140px 60px;
+  }
+
+  // ---------- Заголовок ----------
+  &__title {
+    font-size: clamp(36px, 5vw, 72px);
+    font-weight: $fw-semibold;
+    line-height: 1.05;
+    letter-spacing: 0%;
+    color: $color-white;
+    margin-bottom: 24px;
+
+    // акцентное слово "Enjoy premium"
+    em {
+      font-style: italic;
+      font-weight: $fw-medium;
+      color: $color-accent;
+    }
+  }
+
+  // ---------- Описание ----------
+  &__text {
+    font-size: clamp(16px, 1.1vw, 16px);
+    line-height: 1.5;
+    color: rgba(255, 255, 255, .8);
+    max-width: 480px;
+    margin-bottom: 40px;
+  }
+
+  // ---------- Кнопка "Menu" ----------
+  &__btn {
+    display: inline-block;
+    padding: 16px 42px;
+    background: $color-bg;
+    color: $color-text;
+    font-size: 15px;
+    font-weight: $fw-medium;
+    border-radius: $radius-pill;
+    transition: background .2s ease, color .2s ease, transform .2s ease;
+
+    &:hover {
+      background: $color-accent;
+      color: $color-white;
+    }
+
+    &:active {
+      transform: scale(.97);
+    }
+
+    &:focus-visible {
+      outline: 2px solid $color-white;
+      outline-offset: 4px;
+    }
+  }
+
+  // ==========================================================
+  // Планшет (≤767px)
+  // ==========================================================
+  @include tablet {
+    margin: 0 24px;
+    min-height: 520px;
+    border-radius: 32px;
+
+    &::before {
+      background: linear-gradient(
+        90deg,
+        rgba(0, 0, 0, .7) 0%,
+        rgba(0, 0, 0, .35) 60%,
+        rgba(0, 0, 0, 0)   100%
+      );
+    }
+
+    &__inner {
+      max-width: 520px;
+      padding: 80px 40px;
+    }
+
+    &__title {
+      font-size: 44px;
+      margin-bottom: 20px;
+    }
+
+    &__text {
+      font-size: 15px;
+      margin-bottom: 32px;
+    }
+
+    &__btn {
+      padding: 14px 36px;
+      font-size: 14px;
+    }
+  }
+
+  // ==========================================================
+  // Мобильный (≤379px)
+  // ==========================================================
+  @include mobile {
+    margin: 0 16px;
+    min-height: 460px;
+    border-radius: 24px;
+
+    // на мобиле затемняем больше — текст должен читаться
+    &::before {
+      background: linear-gradient(
+        180deg,
+        rgba(0, 0, 0, .45) 0%,
+        rgba(0, 0, 0, .75) 100%
+      );
+    }
+
+    &__inner {
+      padding: 56px 24px;
+      max-width: 100%;
+    }
+
+    &__title {
+      font-size: 30px;
+      line-height: 1.15;
+      margin-bottom: 16px;
+
+      // на мобиле переносы из <br> уже не нужны,
+      // текст сам ляжет по ширине
+      br { display: none; }
+    }
+
+    &__text {
+      font-size: 14px;
+      margin-bottom: 24px;
+    }
+
+    &__btn {
+      padding: 12px 32px;
+      font-size: 14px;
+      width: 100%;
+      text-align: center;
+    }
+  }
+}

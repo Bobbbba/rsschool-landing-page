@@ -1,0 +1,112 @@
+.favorite {
+  padding: 100px 0 80px;
+
+  &__title {
+    text-align: center;
+    font-size: $fs-h2;
+    font-weight: $fw-semibold;
+    line-height: 1.1;
+    margin-bottom: 60px;
+    color: $color-text;
+    em { color: $color-accent; }
+  }
+
+  @include tablet {
+    padding: 70px 0 60px;
+    &__title { margin-bottom: 40px; }
+  }
+
+  @include mobile {
+    padding: 50px 0 40px;
+    &__title { margin-bottom: 28px; }
+  }
+}
+
+.slider {
+  position: relative;
+  display: flex;
+  align-items: center;
+  gap: 40px;
+
+  &__viewport { flex: 1; overflow: hidden; }
+  &__track {
+    display: flex;
+    transition: transform .45s cubic-bezier(.4,0,.2,1);
+  }
+  &__slide {
+    flex: 0 0 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+    padding: 0 20px;
+  }
+  &__img {
+    width: 320px;
+    height: 440px;
+    object-fit: contain;
+    margin-bottom: 24px;
+  }
+  &__name  { font-size: $fs-h3; font-weight: $fw-semibold; margin-bottom: 12px; }
+  &__desc  { max-width: 460px; font-size: $fs-body; color: $color-accent; margin-bottom: 16px; }
+  &__price { font-size: $fs-h3; font-weight: $fw-semibold; }
+
+  &__btn {
+    flex-shrink: 0;
+    width: 48px;
+    height: 48px;
+    border-radius: 50%;
+    border: 1px solid $color-border;
+    color: $color-text;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: background .2s, color .2s, border-color .2s;
+
+    &:hover {
+      background: $color-text;
+      color: $color-bg;
+      border-color: $color-text;
+    }
+  }
+
+  &__dots {
+    position: absolute;
+    bottom: -50px;
+    left: 50%;
+    transform: translateX(-50%);
+    display: flex;
+    gap: 10px;
+  }
+  &__dot {
+    width: 40px;
+    height: 4px;
+    background: rgba($color-text, .25);
+    transition: background .2s;
+    &.is-active { background: $color-text; }
+  }
+
+  // ===== Планшет =====
+  @include tablet {
+    gap: 16px;
+    &__btn { width: 40px; height: 40px; }
+    &__img { width: 260px; height: 340px; margin-bottom: 20px; }
+    &__dots { bottom: -40px; }
+    &__dot  { width: 32px; }
+  }
+
+  // ===== Мобильный =====
+  @include mobile {
+    gap: 8px;
+    &__slide { padding: 0 8px; }
+    &__btn {
+      width: 36px;
+      height: 36px;
+      svg { width: 14px; height: 14px; }
+    }
+    &__img   { width: 200px; height: 260px; margin-bottom: 16px; }
+    &__desc  { font-size: 13px; }
+    &__dots  { bottom: -32px; gap: 6px; }
+    &__dot   { width: 24px; height: 3px; }
+  }
+}

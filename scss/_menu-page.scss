@@ -1,0 +1,145 @@
+@use 'variables' as *;
+@use 'mixins' as *;
+
+// ==========================================================
+// Menu page — заголовок + табы + сетка карточек
+// ==========================================================
+.menu-page {
+  padding: 60px 0 100px;
+
+  &__title {
+    font-size: clamp(28px, 4.2vw, 60px);
+    font-weight: $fw-semibold;
+    line-height: 1.15;
+    letter-spacing: -0.01em;
+    color: $color-text;
+    text-align: center;
+    max-width: 900px;
+    margin: 0 auto 40px;
+
+    em {
+      font-style: italic;
+      font-weight: $fw-medium;
+      color: $color-accent;
+    }
+  }
+
+  @include tablet {
+    padding: 40px 0 70px;
+
+    &__title { margin-bottom: 32px; }
+  }
+
+  @include mobile {
+    padding: 32px 0 50px;
+
+    &__title {
+      font-size: 26px;
+      margin-bottom: 24px;
+    }
+  }
+}
+
+// ==========================================================
+// Сетка карточек
+// ==========================================================
+.menu-grid {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 40px;
+  padding: 40px 0 0;
+
+  @include tablet {
+    grid-template-columns: repeat(2, 1fr);
+    gap: 24px;
+  }
+
+  @include mobile {
+    grid-template-columns: 1fr;
+    gap: 20px;
+  }
+}
+
+// ==========================================================
+// Карточка напитка
+// ==========================================================
+.menu-card {
+  display: flex;
+  flex-direction: column;
+  border: 1px solid $color-card-border;;
+  border-radius: 40px;
+  overflow: hidden;
+  background: transparent;
+  transition: transform .25s ease, box-shadow .25s ease;
+
+  &:hover {
+    transform: translateY(-4px);
+    box-shadow: 0 12px 24px rgba($color-text, .08);
+  }
+
+  &__img-wrap {
+    overflow: hidden;
+    border-radius: 40px;
+    aspect-ratio: 1 / 1;
+  }
+
+  &__img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    display: block;
+    transition: transform .4s ease;
+  }
+
+  &:hover &__img {
+    transform: scale(1.04);
+  }
+
+  &__body {
+    padding: 20px 20px 24px;
+    display: flex;
+    flex-direction: column;
+    flex: 1;
+  }
+
+  &__title {
+    font-size: 22px;
+    font-weight: $fw-semibold;
+    color: $color-text;
+    margin: 0 0 12px;
+  }
+
+  &__desc {
+    font-size: 15px;
+    line-height: 1.4;
+    color: $color-text;
+    margin: 0 0 12px;
+    flex: 1;                    // выравнивает высоту с соседними карточками
+  }
+
+  &__price {
+    font-size: 20px;
+    font-weight: $fw-semibold;
+    color: $color-text;
+    margin: 0;
+  }
+
+  @include tablet {
+    border-radius: 32px;
+
+    &__img-wrap { border-radius: 32px; }
+    &__title    { font-size: 20px; }
+    &__desc     { font-size: 14px; }
+    &__price    { font-size: 18px; }
+  }
+
+  @include mobile {
+    border-radius: 24px;
+
+    &__img-wrap { border-radius: 24px; }
+    &__body     { padding: 16px 16px 20px; }
+    &__title    { font-size: 18px; margin-bottom: 8px; }
+    &__desc     { font-size: 13px; margin-bottom: 8px; }
+    &__price    { font-size: 16px; }
+  }
+}

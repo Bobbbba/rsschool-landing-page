@@ -1,0 +1,73 @@
+// ===== CSS-переменные (меняются через data-theme) =====
+:root {
+  // Светлая тема (по умолчанию)
+  --color-bg:        #E1D4C9;
+  --color-text:      #403F3D;
+  --color-footer:    #665F55;
+  --color-accent:    #B0907A;
+  --color-white:     #FFFFFF;
+  --color-border:    rgba(64, 63, 61, .25);
+  --color-card-bg:   transparent;
+  --color-btn-bg:    #FFFFFF;
+  --color-btn-text:  #403F3D;
+  --color-card-border: rgba(64, 63, 61, .15);  
+  --slider-dot-bg: rgba(64, 63, 61, .25);
+
+  // Фон hero-оверлея (градиент)
+  --hero-overlay:    rgba(0, 0, 0, .75);
+
+  // Тени
+  --shadow-card:     0 12px 24px rgba(64, 63, 61, .08);
+}
+
+[data-theme="dark"] {
+  --color-bg:        #292826;   // фон страницы — тёмный
+  --color-text:      #E1D4C9;   // основной текст — светлый
+  --color-footer:    #665F55;   // футер оставляем (или можно затемнить)
+  --color-accent:    #B0907A;   // акцент — тот же
+  --color-white:     #FFFFFF;
+  --color-border:    rgba(225, 212, 201, .25);
+  --color-card-bg:   transparent;
+  --color-btn-bg:    #E1D4C9;
+  --color-btn-text:  #403F3D;
+  --color-card-border: rgba(225, 212, 201, .2); // тёмная тема
+  --slider-dot-bg: rgba(225, 212, 201, .3);
+
+  --hero-overlay:    rgba(0, 0, 0, .55);
+
+  --shadow-card:     0 12px 24px rgba(0, 0, 0, .25);
+}
+
+// ===== SCSS-переменные — обёртки над CSS-переменными =====
+$color-bg:       var(--color-bg);
+$color-text:     var(--color-text);
+$color-footer:   var(--color-footer);
+$color-accent:   var(--color-accent);
+$color-white:    var(--color-white);
+$color-border:   var(--color-border);
+$color-card-bg:  var(--color-card-bg);
+$color-btn-bg:   var(--color-btn-bg);
+$color-btn-text: var(--color-btn-text);
+$color-card-border: var(--color-card-border);
+$slider-dot-bg:  var(--slider-dot-bg);
+
+// Остальное — без изменений
+$font-main: 'Inter', system-ui, sans-serif;
+$fw-regular:  400;
+$fw-medium:   500;
+$fw-semibold: 600;
+
+$fs-h1:   clamp(32px, 5vw, 72px);
+$fs-h2:   clamp(28px, 4.2vw, 60px);
+$fs-h3:   clamp(20px, 1.7vw, 24px);
+$fs-body: clamp(14px, 1.1vw, 16px);
+
+$container-max: 1440px;
+$container-pad: 40px;
+
+$radius-lg:   40px;
+$radius-md:   16px;
+$radius-pill: 100px;
+
+$bp-tablet: 768px;
+$bp-mobile: 380px;
