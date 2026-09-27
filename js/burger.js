@@ -1,66 +1,43 @@
-// ==========================================================
-// Мобильное меню (бургер)
-// ==========================================================
 (function () {
-  const menuBtn = document.querySelector('.header__menu-btn');
-  const nav     = document.getElementById('nav');
+  const burger = document.querySelector('.header__burger');  // ← было .header__menu-btn
+  const nav    = document.getElementById('nav');
 
-  if (!menuBtn || !nav) return;
-
-  const MOBILE_BREAKPOINT = 768; // совпадает с $bp-tablet
-  const body = document.body;
+  if (!burger || !nav) return;
 
   function openMenu() {
     nav.classList.add('is-open');
-    menuBtn.setAttribute('aria-expanded', 'true');
-    menuBtn.setAttribute('aria-label', 'Закрыть меню');
-    body.classList.add('no-scroll');
+    burger.setAttribute('aria-expanded', 'true');
+    burger.setAttribute('aria-label', 'Закрыть меню навигации');
+    burger.classList.add('is-active')
+    document.body.classList.add('no-scroll');
   }
 
   function closeMenu() {
     nav.classList.remove('is-open');
-    menuBtn.setAttribute('aria-expanded', 'false');
-    menuBtn.setAttribute('aria-label', 'Открыть меню');
-    body.classList.remove('no-scroll');
+    burger.setAttribute('aria-expanded', 'false');
+    burger.setAttribute('aria-label', 'Открыть меню навигации');
+    burger.classList.remove('is-active')
+    document.body.classList.remove('no-scroll');
   }
 
-  function toggleMenu() {
-    const isOpen = menuBtn.getAttribute('aria-expanded') === 'true';
+  burger.addEventListener('click', () => {
+    const isOpen = burger.getAttribute('aria-expanded') === 'true';
     isOpen ? closeMenu() : openMenu();
-  }
+  });
 
-  // Клик по кнопке
-  menuBtn.addEventListener('click', toggleMenu);
-
-  // Клик по ссылке внутри меню — закрываем
   nav.querySelectorAll('.nav__link').forEach((link) => {
     link.addEventListener('click', closeMenu);
   });
 
-  // Escape
   document.addEventListener('keydown', (e) => {
-    if (e.key === 'Escape' && menuBtn.getAttribute('aria-expanded') === 'true') {
+    if (e.key === 'Escape' && burger.getAttribute('aria-expanded') === 'true') {
       closeMenu();
-      menuBtn.focus();
+      burger.focus();
     }
   });
 
-  // Клик вне меню (но не по кнопке)
-  document.addEventListener('click', (e) => {
-    const isOpen = menuBtn.getAttribute('aria-expanded') === 'true';
-    if (!isOpen) return;
-    if (nav.contains(e.target) || menuBtn.contains(e.target)) return;
-    closeMenu();
-  });
-
-  // Автоматическое закрытие при переходе на десктоп
-  let resizeTimer;
+  // Автозакрытие при переходе на десктоп
   window.addEventListener('resize', () => {
-    clearTimeout(resizeTimer);
-    resizeTimer = setTimeout(() => {
-      if (window.innerWidth >= MOBILE_BREAKPOINT) {
-        closeMenu();
-      }
-    }, 150);
+    if (window.innerWidth > 768) closeMenu();
   });
 })();
