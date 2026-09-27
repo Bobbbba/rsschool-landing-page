@@ -25,50 +25,80 @@
         </a>
 
         <nav class="nav" id="nav" aria-label="Основная навигация">
-          <ul class="nav__list">
-            <li class="nav__item">
-              <a href="index.html#favorite" class="nav__link" aria-current="page">Favorite coffee</a>
-            </li>
-            <li class="nav__item">
-              <a href="index.html#about" class="nav__link">About</a>
-            </li>
-            <li class="nav__item">
-              <a href="index.html#app" class="nav__link">Mobile app</a>
-            </li>
-            <li class="nav__item">
-              <a href="#contacts" class="nav__link">Contact us</a>
-            </li>
-          </ul>
-        </nav>
+  <ul class="nav__list">
+    <li class="nav__item">
+      <a href="menu.html" class="nav__link">Favorite coffee</a>
+    </li>
+    <li class="nav__item">
+      <a href="index.html#about" class="nav__link">About</a>
+    </li>
+    <li class="nav__item">
+      <a href="index.html#app" class="nav__link">Mobile app</a>
+    </li>
+    <li class="nav__item">
+      <a href="index.html#contacts" class="nav__link">Contact us</a>
+    </li>
+    <li class="nav__item nav__item--menu">
+      <a href="menu.html" class="nav__link" aria-label="Перейти в меню">
+    <span class="header__menu-text">Menu</span>
+    <svg class="header__menu-icon header__menu-icon--cup"
+         width="20" height="20" viewBox="0 0 24 24" fill="none" aria-hidden="true">
+      <path d="M4 8h12v6a4 4 0 0 1-4 4H8a4 4 0 0 1-4-4V8z"
+            stroke="currentColor" stroke-width="1.6"/>
+      <path d="M16 10h2a3 3 0 0 1 0 6h-2"
+            stroke="currentColor" stroke-width="1.6"/>
+      <path d="M8 4c0-.8.6-1.5 1.5-1.5M12 4c0-.8.6-1.5 1.5-1.5"
+            stroke="currentColor" stroke-width="1.4" stroke-linecap="round"/>
+    </svg>
+  </a>
+    </li>
+
+   
+  </ul>
+</nav>
 
         <div class="header__actions">
           <button class="theme-toggle" type="button" aria-label="Переключить тему" aria-pressed="false">
-            <span class="theme-toggle__track"><span class="theme-toggle__thumb"></span></span>
-            <span class="theme-toggle__icons" aria-hidden="true">
-              <svg class="theme-toggle__icon theme-toggle__icon--sun" width="16" height="16" viewBox="0 0 24 24" fill="none">
-                <circle cx="12" cy="12" r="4" stroke="currentColor" stroke-width="1.5"/>
-                <path d="M12 2v2M12 20v2M4.93 4.93l1.41 1.41M17.66 17.66l1.41 1.41M2 12h2M20 12h2M4.93 19.07l1.41-1.41M17.66 6.34l1.41-1.41"
-                      stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/>
-              </svg>
-              <svg class="theme-toggle__icon theme-toggle__icon--moon" width="16" height="16" viewBox="0 0 24 24" fill="none">
-                <path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"
-                      stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
-              </svg>
-            </span>
-          </button>
+    <span class="theme-toggle__track"><span class="theme-toggle__thumb"></span></span>
+    <span class="theme-toggle__icons" aria-hidden="true">
+      <svg class="theme-toggle__icon theme-toggle__icon--sun" width="16" height="16" viewBox="0 0 24 24" fill="none">
+        <circle cx="12" cy="12" r="4" stroke="currentColor" stroke-width="1.5"/>
+        <path d="M12 2v2M12 20v2M4.93 4.93l1.41 1.41M17.66 17.66l1.41 1.41M2 12h2M20 12h2M4.93 19.07l1.41-1.41M17.66 6.34l1.41-1.41"
+              stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/>
+      </svg>
+      <svg class="theme-toggle__icon theme-toggle__icon--moon" width="16" height="16" viewBox="0 0 24 24" fill="none">
+        <path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"
+              stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+      </svg>
+    </span>
+  </button>
+     <!-- 1) Десктоп: ссылка «Menu + чашка» (видна только ≥769px) -->
+  <a href="menu.html" class="header__menu-link" aria-label="Перейти в меню">
+    <span class="header__menu-text">Menu</span>
+    <svg class="header__menu-icon header__menu-icon--cup"
+         width="20" height="20" viewBox="0 0 24 24" fill="none" aria-hidden="true">
+      <path d="M4 8h12v6a4 4 0 0 1-4 4H8a4 4 0 0 1-4-4V8z"
+            stroke="currentColor" stroke-width="1.6"/>
+      <path d="M16 10h2a3 3 0 0 1 0 6h-2"
+            stroke="currentColor" stroke-width="1.6"/>
+      <path d="M8 4c0-.8.6-1.5 1.5-1.5M12 4c0-.8.6-1.5 1.5-1.5"
+            stroke="currentColor" stroke-width="1.4" stroke-linecap="round"/>
+    </svg>
+  </a>
 
-          <button class="header__menu-btn" type="button" aria-label="Открыть меню"
-                  aria-expanded="false" aria-controls="nav">
-            <span class="header__menu-text header__menu-text--open">Menu</span>
-            <span class="header__menu-text header__menu-text--close">Menu</span>
-            <svg width="20" height="20" viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg">
-<path d="M14.167 9.76667V11.6667C14.167 14.8883 11.5553 17.5 8.33366 17.5C5.112 17.5 2.50033 14.8883 2.50033 11.6667V9.76667C2.50033 9.4353 2.76896 9.16667 3.10033 9.16667H13.567C13.8984 9.16667 14.167 9.4353 14.167 9.76667Z" stroke="#403F3D" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
-<path d="M10.0003 7.50008C10.0003 6.66675 10.5956 5.83341 11.786 5.83341C13.101 5.83341 14.167 4.76743 14.167 3.45246V2.91675" stroke="#403F3D" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
-<path d="M6.66634 7.5V7.08333C6.66634 5.70262 7.78563 4.58333 9.16634 4.58333C10.0868 4.58333 10.833 3.83714 10.833 2.91667V2.5" stroke="#403F3D" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
-<path d="M13.333 9.16675H15.4163C16.5669 9.16675 17.4997 10.0995 17.4997 11.2501C17.4997 12.4007 16.5669 13.3334 15.4163 13.3334H14.1663" stroke="#403F3D" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
-</svg>
-
-          </button>
+  <!-- 2) Мобиле/планшет: кнопка-бургер в круге (видна только ≤768px) -->
+  <button type="button"
+        class="header__burger"
+        aria-label="Открыть меню навигации"
+        aria-expanded="false"
+        aria-controls="nav">
+  <svg class="header__burger-icon"
+       width="18" height="14" viewBox="0 0 20 14" fill="none" aria-hidden="true">
+    <line class="header__burger-line header__burger-line--top"    x1="1" y1="1"  x2="19" y2="1"  stroke="currentColor" stroke-width="1.6" stroke-linecap="round"/>
+    <line class="header__burger-line header__burger-line--mid"    x1="1" y1="7"  x2="19" y2="7"  stroke="currentColor" stroke-width="1.6" stroke-linecap="round"/>
+    <line class="header__burger-line header__burger-line--bottom" x1="1" y1="13" x2="19" y2="13" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"/>
+  </svg>
+</button>
         </div>
 
       </div>
@@ -76,180 +106,349 @@
 
     <main>
       <!-- PAGE HEADER (заголовок и табы) -->
-      <section class="menu-page" aria-labelledby="menu-page-title">
-        <div class="container">
+     <section class="menu-page" aria-labelledby="menu-page-title">
+  <div class="container">
 
-          <h1 class="menu-page__title" id="menu-page-title">
-            Behind each of our cups hides an <em>amazing surprise</em>
-          </h1>
+    <h1 class="menu-page__title" id="menu-page-title">
+      Behind each of our cups hides an <em>amazing surprise</em>
+    </h1>
 
-          <!-- Табы -->
-          <div class="tabs" data-tabs>
-            <div class="tabs__nav" role="tablist" aria-label="Категории меню">
+    <!-- ТАБЫ -->
+    <div class="tabs" data-tabs>
 
-              <button class="tabs__btn is-active" type="button"
-                      role="tab" id="tab-coffee"
-                      aria-selected="true" aria-controls="panel-coffee"
-                      data-tab="coffee">
-                <svg class="tabs__icon" width="16" height="16" viewBox="0 0 24 24" fill="none" aria-hidden="true">
-                  <path d="M4 8h12v6a4 4 0 0 1-4 4H8a4 4 0 0 1-4-4V8z" stroke="currentColor" stroke-width="1.6"/>
-                  <path d="M16 10h2a3 3 0 0 1 0 6h-2" stroke="currentColor" stroke-width="1.6"/>
-                </svg>
-                Coffee
-              </button>
+      <!-- Кнопки-табы -->
+      <div class="tabs__nav" role="tablist" aria-label="Категории меню">
 
-              <button class="tabs__btn" type="button"
-                      role="tab" id="tab-tea"
-                      aria-selected="false" aria-controls="panel-tea"
-                      data-tab="tea">
-                <svg class="tabs__icon" width="16" height="16" viewBox="0 0 24 24" fill="none" aria-hidden="true">
-                  <path d="M6 3v6a6 6 0 0 0 12 0V3" stroke="currentColor" stroke-width="1.6"/>
-                  <path d="M6 21h12" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"/>
-                </svg>
-                Tea
-              </button>
+        <button class="tabs__btn is-active"
+                type="button"
+                role="tab"
+                id="tab-coffee"
+                aria-selected="true"
+                aria-controls="panel-coffee"
+                data-tab="coffee">
+          <span class="tabs__icon" aria-hidden="true"></span>
+          Coffee
+        </button>
 
-              <button class="tabs__btn" type="button"
-                      role="tab" id="tab-dessert"
-                      aria-selected="false" aria-controls="panel-dessert"
-                      data-tab="dessert">
-                <svg class="tabs__icon" width="16" height="16" viewBox="0 0 24 24" fill="none" aria-hidden="true">
-                  <path d="M5 11h14l-1.5 8a2 2 0 0 1-2 1.6H8.5a2 2 0 0 1-2-1.6L5 11z" stroke="currentColor" stroke-width="1.6"/>
-                  <path d="M12 3v5M9 5l3-2 3 2" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"/>
-                </svg>
-                Dessert
-              </button>
+        <button class="tabs__btn"
+                type="button"
+                role="tab"
+                id="tab-tea"
+                aria-selected="false"
+                aria-controls="panel-tea"
+                data-tab="tea"
+                tabindex="-1">
+          <span class="tabs__icon" aria-hidden="true"></span>
+          Tea
+        </button>
 
+        <button class="tabs__btn"
+                type="button"
+                role="tab"
+                id="tab-dessert"
+                aria-selected="false"
+                aria-controls="panel-dessert"
+                data-tab="dessert"
+                tabindex="-1">
+          <span class="tabs__icon" aria-hidden="true"></span>
+          Dessert
+        </button>
+
+      </div>
+
+      <!-- ПАНЕЛИ -->
+
+      <!-- Coffee -->
+      <div class="tabs__panel is-active"
+           id="panel-coffee"
+           role="tabpanel"
+           aria-labelledby="tab-coffee">
+
+        <ul class="menu-grid">
+          <!-- 8 карточек Coffee -->
+          <li class="menu-card">
+            <div class="menu-card__img-wrap">
+              <img class="menu-card__img"
+                   src="img/menu/coffee/irish-coffee.png"
+                   alt="Irish coffee" width="310" height="310" loading="lazy">
             </div>
-
-            <!-- Панели -->
-            <div class="tabs__panels">
-
-              <!-- COFFEE -->
-              <div class="tabs__panel is-active"
-                   id="panel-coffee" role="tabpanel" aria-labelledby="tab-coffee">
-                <ul class="menu-grid">
-                  <!-- 8 карточек; ниже пример одной -->
-                  <li class="menu-card">
-                    <div class="menu-card__img-wrap">
-                      <img class="menu-card__img"
-                           src="img/menu/coffee/Irish-coffee.png"
-                           alt="Irish coffee" width="310" height="310" loading="lazy">
-                    </div>
-                    <div class="menu-card__body">
-                      <h2 class="menu-card__title">Irish coffee</h2>
-                      <p class="menu-card__desc">Fragrant black coffee with Jameson Irish whiskey and whipped milk</p>
-                      <p class="menu-card__price">$7.00</p>
-                    </div>
-                  </li>
-
-                  <li class="menu-card">
-                    <div class="menu-card__img-wrap">
-                      <img class="menu-card__img" src="img/menu/coffee/Kahlua-coffee.png"
-                           alt="Kahlua coffee" width="310" height="310" loading="lazy">
-                    </div>
-                    <div class="menu-card__body">
-                      <h2 class="menu-card__title">Kahlua coffee</h2>
-                      <p class="menu-card__desc">Classic coffee with milk and Kahlua liqueur under a cap of frothed milk</p>
-                      <p class="menu-card__price">$7.00</p>
-                    </div>
-                  </li>
-
-                  <li class="menu-card">
-                    <div class="menu-card__img-wrap">
-                      <img class="menu-card__img" src="img/menu/coffee/Honey-raf.png"
-                           alt="Honey raf" width="310" height="310" loading="lazy">
-                    </div>
-                    <div class="menu-card__body">
-                      <h2 class="menu-card__title">Honey raf</h2>
-                      <p class="menu-card__desc">Espresso with frothed milk, cream and aromatic honey</p>
-                      <p class="menu-card__price">$5.50</p>
-                    </div>
-                  </li>
-
-                  <li class="menu-card">
-                    <div class="menu-card__img-wrap">
-                      <img class="menu-card__img" src="img/menu/coffee/Ice-cappuccino.png"
-                           alt="Ice cappuccino" width="310" height="310" loading="lazy">
-                    </div>
-                    <div class="menu-card__body">
-                      <h2 class="menu-card__title">Ice cappuccino</h2>
-                      <p class="menu-card__desc">Cappuccino with soft thick foam in summer version with ice</p>
-                      <p class="menu-card__price">$5.00</p>
-                    </div>
-                  </li>
-
-                  <li class="menu-card">
-                    <div class="menu-card__img-wrap">
-                      <img class="menu-card__img" src="img/menu/coffee/Espresso.png"
-                           alt="Espresso" width="310" height="310" loading="lazy">
-                    </div>
-                    <div class="menu-card__body">
-                      <h2 class="menu-card__title">Espresso</h2>
-                      <p class="menu-card__desc">Classic black coffee</p>
-                      <p class="menu-card__price">$4.50</p>
-                    </div>
-                  </li>
-
-                  <li class="menu-card">
-                    <div class="menu-card__img-wrap">
-                      <img class="menu-card__img" src="img/menu/coffee/Latte.png"
-                           alt="Latte" width="310" height="310" loading="lazy">
-                    </div>
-                    <div class="menu-card__body">
-                      <h2 class="menu-card__title">Latte</h2>
-                      <p class="menu-card__desc">Espresso coffee with the addition of steamed milk and dense milk foam</p>
-                      <p class="menu-card__price">$5.50</p>
-                    </div>
-                  </li>
-
-                  <li class="menu-card">
-                    <div class="menu-card__img-wrap">
-                      <img class="menu-card__img" src="img/menu/coffee/Latte-macchiato.png"
-                           alt="Latte macchiato" width="310" height="310" loading="lazy">
-                    </div>
-                    <div class="menu-card__body">
-                      <h2 class="menu-card__title">Latte macchiato</h2>
-                      <p class="menu-card__desc">Espresso with frothed milk and chocolate</p>
-                      <p class="menu-card__price">$5.50</p>
-                    </div>
-                  </li>
-
-                  <li class="menu-card">
-                    <div class="menu-card__img-wrap">
-                      <img class="menu-card__img" src="img/menu/coffee/Coffee-with-cognac.png"
-                           alt="Coffee with cognac" width="310" height="310" loading="lazy">
-                    </div>
-                    <div class="menu-card__body">
-                      <h2 class="menu-card__title">Coffee with cognac</h2>
-                      <p class="menu-card__desc">Fragrant black coffee with cognac and whipped cream</p>
-                      <p class="menu-card__price">$6.50</p>
-                    </div>
-                  </li>
-                </ul>
-              </div>
-
-              <!-- TEA -->
-              <div class="tabs__panel"
-                   id="panel-tea" role="tabpanel" aria-labelledby="tab-tea" hidden>
-                <ul class="menu-grid">
-                  <!-- 8 карточек для Tea (можно скопировать структуру) -->
-                </ul>
-              </div>
-
-              <!-- DESSERT -->
-              <div class="tabs__panel"
-                   id="panel-dessert" role="tabpanel" aria-labelledby="tab-dessert" hidden>
-                <ul class="menu-grid">
-                  <!-- 8 карточек для Dessert -->
-                </ul>
-              </div>
-
+            <div class="menu-card__body">
+              <h3 class="menu-card__title">Irish coffee</h3>
+              <p class="menu-card__desc">Fragrant black coffee with Jameson Irish whiskey and whipped milk</p>
+              <p class="menu-card__price">$7.00</p>
             </div>
-          </div>
+          </li>
 
-        </div>
-      </section>
+          <li class="menu-card">
+            <div class="menu-card__img-wrap">
+              <img class="menu-card__img"
+                   src="img/menu/coffee/kahlua-coffee.png"
+                   alt="Kahlua coffee" width="310" height="310" loading="lazy">
+            </div>
+            <div class="menu-card__body">
+              <h3 class="menu-card__title">Kahlua coffee</h3>
+              <p class="menu-card__desc">Classic coffee with milk and Kahlua liqueur under a cap of frothed milk</p>
+              <p class="menu-card__price">$7.00</p>
+            </div>
+          </li>
+
+          <li class="menu-card">
+            <div class="menu-card__img-wrap">
+              <img class="menu-card__img"
+                   src="img/menu/coffee/honey-raf.png"
+                   alt="Honey raf" width="310" height="310" loading="lazy">
+            </div>
+            <div class="menu-card__body">
+              <h3 class="menu-card__title">Honey raf</h3>
+              <p class="menu-card__desc">Espresso with frothed milk, cream and aromatic honey</p>
+              <p class="menu-card__price">$5.50</p>
+            </div>
+          </li>
+
+          <li class="menu-card">
+            <div class="menu-card__img-wrap">
+              <img class="menu-card__img"
+                   src="img/menu/coffee/ice-cappuccino.png"
+                   alt="Ice cappuccino" width="310" height="310" loading="lazy">
+            </div>
+            <div class="menu-card__body">
+              <h3 class="menu-card__title">Ice cappuccino</h3>
+              <p class="menu-card__desc">Cappuccino with soft thick foam in summer version with ice</p>
+              <p class="menu-card__price">$5.00</p>
+            </div>
+          </li>
+
+          <li class="menu-card">
+            <div class="menu-card__img-wrap">
+              <img class="menu-card__img"
+                   src="img/menu/coffee/espresso.png"
+                   alt="Espresso" width="310" height="310" loading="lazy">
+            </div>
+            <div class="menu-card__body">
+              <h3 class="menu-card__title">Espresso</h3>
+              <p class="menu-card__desc">Classic black coffee</p>
+              <p class="menu-card__price">$4.50</p>
+            </div>
+          </li>
+
+          <li class="menu-card">
+            <div class="menu-card__img-wrap">
+              <img class="menu-card__img"
+                   src="img/menu/coffee/latte.png"
+                   alt="Latte" width="310" height="310" loading="lazy">
+            </div>
+            <div class="menu-card__body">
+              <h3 class="menu-card__title">Latte</h3>
+              <p class="menu-card__desc">Espresso coffee with the addition of steamed milk and dense milk foam</p>
+              <p class="menu-card__price">$5.50</p>
+            </div>
+          </li>
+
+          <li class="menu-card">
+            <div class="menu-card__img-wrap">
+              <img class="menu-card__img"
+                   src="img/menu/coffee/latte-macchiato.png"
+                   alt="Latte macchiato" width="310" height="310" loading="lazy">
+            </div>
+            <div class="menu-card__body">
+              <h3 class="menu-card__title">Latte macchiato</h3>
+              <p class="menu-card__desc">Espresso with frothed milk and chocolate</p>
+              <p class="menu-card__price">$5.50</p>
+            </div>
+          </li>
+
+          <li class="menu-card">
+            <div class="menu-card__img-wrap">
+              <img class="menu-card__img"
+                   src="img/menu/coffee/coffee-with-cognac.png"
+                   alt="Coffee with cognac" width="310" height="310" loading="lazy">
+            </div>
+            <div class="menu-card__body">
+              <h3 class="menu-card__title">Coffee with cognac</h3>
+              <p class="menu-card__desc">Fragrant black coffee with cognac and whipped cream</p>
+              <p class="menu-card__price">$6.50</p>
+            </div>
+          </li>
+        </ul>
+      </div>
+
+      <!-- Tea -->
+      <div class="tabs__panel"
+           id="panel-tea"
+           role="tabpanel"
+           aria-labelledby="tab-tea"
+           hidden>
+
+        <ul class="menu-grid">
+          <!-- Moroccан -->
+          <li class="menu-card">
+            <div class="menu-card__img-wrap">
+              <img class="menu-card__img"
+                   src="img/menu/tea/moroccan.png"
+                   alt="Moroccan tea" width="310" height="310" loading="lazy">
+            </div>
+            <div class="menu-card__body">
+              <h3 class="menu-card__title">Moroccan</h3>
+              <p class="menu-card__desc">Fragrant black tea with the addition of tangerine, cinnamon, honey, lemon and mint</p>
+              <p class="menu-card__price">$4.50</p>
+            </div>
+          </li>
+
+          <li class="menu-card">
+            <div class="menu-card__img-wrap">
+              <img class="menu-card__img"
+                   src="img/menu/tea/ginger.png"
+                   alt="Ginger tea" width="310" height="310" loading="lazy">
+            </div>
+            <div class="menu-card__body">
+              <h3 class="menu-card__title">Ginger</h3>
+              <p class="menu-card__desc">Original black tea with fresh ginger, lemon and honey</p>
+              <p class="menu-card__price">$5.00</p>
+            </div>
+          </li>
+
+          <li class="menu-card">
+            <div class="menu-card__img-wrap">
+              <img class="menu-card__img"
+                   src="img/menu/tea/cranberry.png"
+                   alt="Cranberry tea" width="310" height="310" loading="lazy">
+            </div>
+            <div class="menu-card__body">
+              <h3 class="menu-card__title">Cranberry</h3>
+              <p class="menu-card__desc">Invigorating black tea with cranberry and honey</p>
+              <p class="menu-card__price">$5.00</p>
+            </div>
+          </li>
+
+          <li class="menu-card">
+            <div class="menu-card__img-wrap">
+              <img class="menu-card__img"
+                   src="img/menu/tea/sea-buckthorn.png"
+                   alt="Sea buckthorn tea" width="310" height="310" loading="lazy">
+            </div>
+            <div class="menu-card__body">
+              <h3 class="menu-card__title">Sea buckthorn</h3>
+              <p class="menu-card__desc">Toning sweet black tea with sea buckthorn, fresh thyme and cinnamon</p>
+              <p class="menu-card__price">$5.50</p>
+            </div>
+          </li>
+        </ul>
+      </div>
+
+      <!-- Dessert -->
+      <div class="tabs__panel"
+           id="panel-dessert"
+           role="tabpanel"
+           aria-labelledby="tab-dessert"
+           hidden>
+
+        <ul class="menu-grid">
+          <!-- Marble cheesecake -->
+          <li class="menu-card">
+            <div class="menu-card__img-wrap">
+              <img class="menu-card__img"
+                   src="img/menu/dessert/marble-cheesecake.png"
+                   alt="Marble cheesecake" width="310" height="310" loading="lazy">
+            </div>
+            <div class="menu-card__body">
+              <h3 class="menu-card__title">Marble cheesecake</h3>
+              <p class="menu-card__desc">Philadelphia cheese with lemon zest on a light sponge cake and red currant jam</p>
+              <p class="menu-card__price">$3.50</p>
+            </div>
+          </li>
+
+          <li class="menu-card">
+            <div class="menu-card__img-wrap">
+              <img class="menu-card__img"
+                   src="img/menu/dessert/red-velvet.png"
+                   alt="Red velvet" width="310" height="310" loading="lazy">
+            </div>
+            <div class="menu-card__body">
+              <h3 class="menu-card__title">Red velvet</h3>
+              <p class="menu-card__desc">Layer cake with cream cheese frosting</p>
+              <p class="menu-card__price">$4.00</p>
+            </div>
+          </li>
+
+          <li class="menu-card">
+            <div class="menu-card__img-wrap">
+              <img class="menu-card__img"
+                   src="img/menu/dessert/cheesecakes.png"
+                   alt="Cheesecakes" width="310" height="310" loading="lazy">
+            </div>
+            <div class="menu-card__body">
+              <h3 class="menu-card__title">Cheesecakes</h3>
+              <p class="menu-card__desc">Soft cottage cheese pancakes with sour cream and fresh berries and sprinkled with powdered sugar</p>
+              <p class="menu-card__price">$4.50</p>
+            </div>
+          </li>
+
+          <li class="menu-card">
+            <div class="menu-card__img-wrap">
+              <img class="menu-card__img"
+                   src="img/menu/dessert/creme-brulee.png"
+                   alt="Creme brulee" width="310" height="310" loading="lazy">
+            </div>
+            <div class="menu-card__body">
+              <h3 class="menu-card__title">Creme brulee</h3>
+              <p class="menu-card__desc">Delicate creamy dessert in a caramel basket with wild berries</p>
+              <p class="menu-card__price">$4.00</p>
+            </div>
+          </li>
+          <li class="menu-card">
+            <div class="menu-card__img-wrap">
+              <img class="menu-card__img"
+                   src="img/menu/dessert/pancakes.png"
+                   alt="Cheesecakes" width="310" height="310" loading="lazy">
+            </div>
+            <div class="menu-card__body">
+              <h3 class="menu-card__title">Pancakes</h3>
+              <p class="menu-card__desc">Tender pancakes with strawberry jam and fresh strawberries</p>
+              <p class="menu-card__price">$4.50</p>
+            </div>
+          </li>
+          <li class="menu-card">
+            <div class="menu-card__img-wrap">
+              <img class="menu-card__img"
+                   src="img/menu/dessert/honey-cake.png"
+                   alt="honey-cake" width="310" height="310" loading="lazy">
+            </div>
+            <div class="menu-card__body">
+              <h3 class="menu-card__title">Honey cake</h3>
+              <p class="menu-card__desc">Classic honey cake with delicate custard</p>
+              <p class="menu-card__price">$4.50</p>
+            </div>
+          </li>
+          <li class="menu-card">
+            <div class="menu-card__img-wrap">
+              <img class="menu-card__img"
+                   src="img/menu/dessert/cheesecakes.png"
+                   alt="Cheesecakes" width="310" height="310" loading="lazy">
+            </div>
+            <div class="menu-card__body">
+              <h3 class="menu-card__title">Chocolate cake</h3>
+              <p class="menu-card__desc">Cake with hot chocolate filling and nuts with dried apricots</p>
+              <p class="menu-card__price">$5.50</p>
+            </div>
+          </li>
+          <li class="menu-card">
+            <div class="menu-card__img-wrap">
+              <img class="menu-card__img"
+                   src="img/menu/dessert/black-forest.png"
+                   alt="Cheesecakes" width="310" height="310" loading="lazy">
+            </div>
+            <div class="menu-card__body">
+              <h3 class="menu-card__title">Black forest</h3>
+              <p class="menu-card__desc">A combination of thin sponge cake with cherry jam and light chocolate mousse</p>
+              <p class="menu-card__price">$6.50</p>
+            </div>
+          </li>
+        </ul>
+      </div>
+
+    </div>
+  </div>
+</section>
     </main>
 
     <!-- FOOTER — тот же, что на главной -->

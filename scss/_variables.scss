@@ -6,7 +6,9 @@
   --color-footer:    #665F55;
   --color-accent:    #B0907A;
   --color-white:     #FFFFFF;
-  --color-border:    rgba(64, 63, 61, .25);
+  --color-border:      rgba(64, 63, 61, .25);
+  --color-border-soft: rgba(64, 63, 61, .3);
+  --color-hover-bg:    rgba(64, 63, 61, .08)
   --color-card-bg:   transparent;
   --color-btn-bg:    #FFFFFF;
   --color-btn-text:  #403F3D;
@@ -26,7 +28,9 @@
   --color-footer:    #665F55;   // футер оставляем (или можно затемнить)
   --color-accent:    #B0907A;   // акцент — тот же
   --color-white:     #FFFFFF;
-  --color-border:    rgba(225, 212, 201, .25);
+  --color-border:      rgba(225, 212, 201, .25);
+  --color-border-soft: rgba(225, 212, 201, .3);
+  --color-hover-bg:    rgba(225, 212, 201, .08);
   --color-card-bg:   transparent;
   --color-btn-bg:    #E1D4C9;
   --color-btn-text:  #403F3D;
