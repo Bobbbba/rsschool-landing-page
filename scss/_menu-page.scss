@@ -52,11 +52,17 @@
   @include tablet {
     grid-template-columns: repeat(2, 1fr);
     gap: 24px;
+    
   }
 
   @include mobile {
     grid-template-columns: 1fr;
     gap: 20px;
+  }
+}
+@media (max-width: #{$bp-tablet}) {
+  .menu-grid .menu-card.is-hidden {
+    display: none;
   }
 }
 
@@ -141,5 +147,51 @@
     &__title    { font-size: 18px; margin-bottom: 8px; }
     &__desc     { font-size: 13px; margin-bottom: 8px; }
     &__price    { font-size: 16px; }
+  }
+}
+.menu-page {
+  &__more {
+    display: none;
+    justify-content: center;
+    margin-top: 40px;
+  }
+  &__more-btn {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: 60px;
+    height: 60px;
+    padding: 0;
+    border: 1px solid var(--color-border-soft);
+    border-radius: 50%;
+    background: transparent;
+    color: $color-text;
+    cursor: pointer;
+    transition: background .2s ease, color .2s ease, border-color .2s ease, transform .3s ease;
+
+    svg { display: block; }
+
+    &:hover {
+      background: var(--color-hover-bg);
+      border-color: $color-text;
+    }
+    &:focus-visible {
+      outline: 2px solid $color-accent;
+      outline-offset: 4px;
+    }
+     // При раскрытом состоянии — поворот иконки
+    &[aria-expanded="true"] {
+      transform: rotate(180deg);
+    }
+  }
+  @include tablet {
+    &__more { margin-top: 24px; }
+    &__more-btn { width: 48px; height: 48px; }
+     &__more {display: flex;}
+  }
+
+  @include mobile {
+    &__more { margin-top: 20px; }
+    &__more-btn { width: 44px; height: 44px; }
   }
 }
