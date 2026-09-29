@@ -13,8 +13,11 @@
   --color-btn-bg:    #FFFFFF;
   --color-btn-text:  #403F3D;
   --color-card-border: rgba(64, 63, 61, .15);  
-  --slider-dot-bg: rgba(64, 63, 61, .25);
-   --slider-dot-bg-active: #403F3D;
+  --slider-dot-bg: #C1B6AD;
+
+  --slider-dot-bg-active:  #665F55;
+
+  
 
   // Фон hero-оверлея (градиент)
   --hero-overlay:    rgba(0, 0, 0, .75);
@@ -36,8 +39,9 @@
   --color-btn-bg:    #E1D4C9;
   --color-btn-text:  #403F3D;
   --color-card-border: rgba(225, 212, 201, .2); // тёмная тема
-  --slider-dot-bg: rgba(225, 212, 201, .3);
-  --slider-dot-bg-active: #E1D4C9;
+  --slider-dot-bg: #665F55;
+
+  --slider-dot-bg-active: #C1B6AD;
   --hero-overlay:    rgba(0, 0, 0, .55);
 
   --shadow-card:     0 12px 24px rgba(0, 0, 0, .25);

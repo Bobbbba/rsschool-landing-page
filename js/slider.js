@@ -4,7 +4,7 @@ class Slider  {
         this.track = root.querySelector('.slider__track');
         this.viewport = root.querySelector('.slider__viewport');
         this.slides = Array.from(root.querySelectorAll('.slider__slide'));
-        this.dots = Array.from(root.querySelector('.slider__dot'));
+        this.dots = Array.from(root.querySelectorAll('.slider__dot'));
         this.prevBtn = root.querySelector('.slider__btn--prev');
         this.nextBtn = root.querySelector('.slider__btn--next');
 
@@ -19,8 +19,8 @@ class Slider  {
     init() {
         if (this.slides.length === 0) return;
 
-        this.nextBtn?.addEventListener('click', () => this.next());
-        this.prevBtn?.addEventListener('click', () => this.prev());
+        this.nextBtn.addEventListener('click', () => this.next());
+        this.prevBtn.addEventListener('click', () => this.prev());
 
 
         this.dots.forEach((dot) => {
@@ -75,15 +75,18 @@ class Slider  {
 
 
 
-    update() {
-        this.track.style.transform = `translateX(-${this.index * 100}%)`;
+   update() {
+  this.track.style.transform = `translateX(-${this.index * 100}%)`;
 
+  this.slides.forEach((slide, i) => {
+    slide.classList.toggle('is-active', i === this.index);
+  });
 
-        this.slides.forEach((slide, i) => {
-            dot.classList.toggle('is-active', i === this.index);
-            dot.setAttribute('aria-current', i === this.index ? 'true' : false);
-        });
-    }
+  // ЭТО ГЛАВНОЕ:
+  this.dots.forEach((dot, i) => {
+    dot.classList.toggle('is-active', i === this.index);
+  });
+}
 
 }
 
