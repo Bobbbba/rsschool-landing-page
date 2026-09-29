@@ -1226,9 +1226,12 @@ body.no-scroll {
 }
 
 .menu-page__more {
-  display: none;
+  display: flex;
   justify-content: center;
   margin-top: 40px;
+}
+.menu-page__more[hidden] {
+  display: none;
 }
 .menu-page__more-btn {
   display: inline-flex;
@@ -1266,9 +1269,6 @@ body.no-scroll {
     width: 48px;
     height: 48px;
   }
-  .menu-page__more {
-    display: flex;
-  }
 }
 @media (max-width: 380px) {
   .menu-page__more {
@@ -1280,6 +1280,11 @@ body.no-scroll {
   }
 }
 
+@media (max-width: 768px) {
+  .menu-grid .menu-card.is-hidden {
+    display: none;
+  }
+}
 .tabs__nav {
   display: flex;
   justify-content: center;

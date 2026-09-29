@@ -1,6 +1,9 @@
+// ==========================================================
+// Кнопка "Показать ещё" — работает с активной панелью
+// ==========================================================
 (function () {
   const MOBILE_BREAKPOINT = 768;
-  const LIMIT_ON_MOBILE  = 4;
+  const LIMIT = 4;
 
   const moreRoot = document.querySelector('[data-more]');
   if (!moreRoot) return;
@@ -8,72 +11,84 @@
   const btn = moreRoot.querySelector('.menu-page__more-btn');
   if (!btn) return;
 
-  // Скрыть карточки сверх лимита (только на мобиле)
-  function hideExtraCards() {
-    const isMobile = window.innerWidth <= MOBILE_BREAKPOINT;
+  // Получить активную панель
+  function getActivePanel() {
+    return document.querySelector('.tabs__panel.is-active')
+        || document.querySelector('.tabs__panel:not([hidden])');
+  }
 
-    document.querySelectorAll('.menu-grid').forEach((grid) => {
-      const cards = Array.from(grid.querySelectorAll('.menu-card'));
-      cards.forEach((card, index) => {
-        const shouldHide = isMobile && index >= LIMIT_ON_MOBILE;
-        card.classList.toggle('is-hidden', shouldHide);
-      });
+  // Скрыть карточки сверх лимита в активной панели
+  function applyLimit() {
+    const isMobile = window.innerWidth <= MOBILE_BREAKPOINT;
+    const panel = getActivePanel();
+    if (!panel) return;
+
+    const cards = Array.from(panel.querySelectorAll('.menu-card'));
+
+    // На десктопе — все видны, кнопку скрыть
+    if (!isMobile) {
+      cards.forEach((c) => c.classList.remove('is-hidden'));
+      moreRoot.setAttribute('hidden', '');
+      return;
+    }
+
+    // На мобиле — прячем всё, что дальше LIMIT
+    cards.forEach((card, i) => {
+      card.classList.toggle('is-hidden', i >= LIMIT);
     });
+
+    // Показать кнопку, только если есть что скрывать
+    const hasHidden = cards.length > LIMIT;
+    if (hasHidden) {
+      moreRoot.removeAttribute('hidden');
+    } else {
+      moreRoot.setAttribute('hidden', '');
+      btn.setAttribute('aria-expanded', 'false');
+    }
   }
 
   // Показать все карточки в активной панели
-  function showAllCards() {
-    const activePanel = document.querySelector('.tabs__panel.is-active');
-    if (!activePanel) return;
+  function showAll() {
+    const panel = getActivePanel();
+    if (!panel) return;
 
-    activePanel.querySelectorAll('.menu-card').forEach((card) => {
+    panel.querySelectorAll('.menu-card').forEach((card) => {
       card.classList.remove('is-hidden');
     });
+    btn.setAttribute('aria-expanded', 'true');
   }
 
-  // Свернуть всё обратно
-  function resetExpanded() {
+  // Свернуть обратно
+  function collapse() {
     btn.setAttribute('aria-expanded', 'false');
-    hideExtraCards();
+    applyLimit();
   }
 
   // Клик по кнопке
   btn.addEventListener('click', () => {
-    const isExpanded = btn.getAttribute('aria-expanded') === 'true';
-
-    if (isExpanded) {
-      resetExpanded();
-    } else {
-      showAllCards();
-      btn.setAttribute('aria-expanded', 'true');
-    }
+    const expanded = btn.getAttribute('aria-expanded') === 'true';
+    expanded ? collapse() : showAll();
   });
 
-  // При смене таба — свернуть обратно
+  // Смена таба — пересчитать состояние
   document.querySelectorAll('.tabs__btn').forEach((tabBtn) => {
-    tabBtn.addEventListener('click', resetExpanded);
+    tabBtn.addEventListener('click', () => {
+      btn.setAttribute('aria-expanded', 'false');
+      // дать tabs.js переключить панель, потом применить лимит
+      setTimeout(applyLimit, 0);
+    });
   });
 
-  // При изменении ширины окна
+  // Resize
   let resizeTimer;
   window.addEventListener('resize', () => {
     clearTimeout(resizeTimer);
     resizeTimer = setTimeout(() => {
-      // Если перешли на десктоп — сбрасываем состояние
-      if (window.innerWidth > MOBILE_BREAKPOINT) {
-        btn.setAttribute('aria-expanded', 'false');
-        document.querySelectorAll('.menu-card').forEach((c) => c.classList.remove('is-hidden'));
-      } else {
-        // Если вернулись на мобиле — заново прячем
-        if (btn.getAttribute('aria-expanded') !== 'true') {
-          hideExtraCards();
-        }
-      }
+      btn.setAttribute('aria-expanded', 'false');
+      applyLimit();
     }, 150);
   });
 
-  // Инициализация при загрузке
-  if (window.innerWidth <= MOBILE_BREAKPOINT) {
-    hideExtraCards();
-  }
+  // Инициализация
+  applyLimit();
 })();

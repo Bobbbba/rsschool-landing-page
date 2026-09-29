@@ -151,10 +151,14 @@
 }
 .menu-page {
   &__more {
-    display: none;
+    display: flex;
     justify-content: center;
     margin-top: 40px;
+
+    // Скрыто на десктопе и когда нет скрытых карточек
+    &[hidden] { display: none; }
   }
+
   &__more-btn {
     display: inline-flex;
     align-items: center;
@@ -175,23 +179,31 @@
       background: var(--color-hover-bg);
       border-color: $color-text;
     }
+
     &:focus-visible {
       outline: 2px solid $color-accent;
       outline-offset: 4px;
     }
-     // При раскрытом состоянии — поворот иконки
+
     &[aria-expanded="true"] {
       transform: rotate(180deg);
     }
   }
+
   @include tablet {
     &__more { margin-top: 24px; }
     &__more-btn { width: 48px; height: 48px; }
-     &__more {display: flex;}
   }
 
   @include mobile {
     &__more { margin-top: 20px; }
     &__more-btn { width: 44px; height: 44px; }
+  }
+}
+
+// Скрытые карточки — только на мобиле
+@media (max-width: #{$bp-tablet}) {
+  .menu-grid .menu-card.is-hidden {
+    display: none;
   }
 }
