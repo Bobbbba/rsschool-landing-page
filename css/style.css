@@ -1744,7 +1744,7 @@ body.no-scroll {
     max-height: calc(100vh - 24px);
   }
   .modal__img-wrap {
-    max-height: 200px;
+    display: none;
   }
   .modal__img {
     height: 200px;
