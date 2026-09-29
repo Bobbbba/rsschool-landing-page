@@ -6,8 +6,8 @@
   if (!modal) return;
 
   // Ссылки на элементы внутри модалки
-  const overlay    = modal.querySelector('.modal__overlay');
-  const windowEl   = modal.querySelector('.modal__window');
+ 
+  
   const imgEl      = modal.querySelector('#modal-img');
   const titleEl    = modal.querySelector('#modal-title');
   const descEl     = modal.querySelector('#modal-desc');
@@ -18,62 +18,170 @@
   const totalEl    = modal.querySelector('#modal-total');
   const noteEl     = modal.querySelector('#modal-note');
 
-  // Фокус-ловушка
+   // Состояние
+  let products   = [];       // все товары из JSON
   let lastFocused = null;
-  let basePrice   = 0;
+  let currentProduct = null;
+  let currentSize    = null; // { key, size, addPrice }
+  let selectedAdditives = []; // [{ name, addPrice }]
+
+  // ---------- Инициализация: загрузка JSON ----------
+  async function loadProducts() {
+    try {
+      const res = await fetch('products.json');
+      if (!res.ok) throw new Error(`HTTP ${res.status}`);
+      products = await res.json();
+    } catch (err) {
+      console.error('Не удалось загрузить products.json:', err);
+      products = [];
+    }
+  }
 
   // ---------- Открытие ----------
   function open(card) {
-    const d = card.dataset;
+    const name = card.dataset.name;
+    if (!name) return;
 
-    // Заголовок и описание
-    titleEl.textContent = d.name || '';
-    descEl.textContent  = d.desc || '';
-
-    // Картинка
-    if (d.img) {
-      imgEl.src = d.img;
-      imgEl.alt = d.name || '';
+    // Находим товар по имени
+    const product = products.find((p) => p.name === name);
+    if (!product) {
+      console.warn('Товар не найден:', name);
+      return;
     }
 
-    // Цена
-    basePrice = parsePrice(d.price);
-    totalEl.textContent = d.price || '';
+    currentProduct = product;
+    selectedAdditives = [];
 
-    // Размеры
-    const sizes = safeParse(d.sizes);
-    if (sizes.length) {
-      sizeGroup.removeAttribute('hidden');
-      renderOptions(sizesEl, sizes, 'size', true);
-    } else {
-      sizeGroup.setAttribute('hidden', '');
-      sizesEl.innerHTML = '';
+    // Заголовок, описание, изображение
+    titleEl.textContent = product.name;
+    descEl.textContent  = product.description;
+
+    // Картинка: ищем в самой карточке (там уже есть <img>)
+    const cardImg = card.querySelector('.menu-card__img');
+    if (cardImg) {
+      imgEl.src = cardImg.currentSrc || cardImg.src;
+      imgEl.alt = cardImg.alt || product.name;
     }
 
-    // Добавки
-    const additives = safeParse(d.additives);
-    if (additives.length) {
-      addGroup.removeAttribute('hidden');
-      renderOptions(addsEl, additives, 'additive', false);
-    } else {
-      addGroup.setAttribute('hidden', '');
-      addsEl.innerHTML = '';
-    }
+    // Размеры: из product.sizes
+    renderSizes(product.sizes);
 
-    // Note
-    noteEl.textContent = d.note || '';
+    // Добавки: из product.additives
+    renderAdditives(product.additives);
+
+    // Пересчитываем итог
+    updateTotal();
 
     // Открытие
     lastFocused = document.activeElement;
-
     modal.removeAttribute('hidden');
-    // дать браузеру отрисовать перед добавлением класса
     requestAnimationFrame(() => modal.classList.add('is-open'));
-
     document.body.classList.add('no-scroll');
 
-    // Фокус на кнопку закрытия
     modal.querySelector('.modal__close')?.focus();
+  }
+
+  // ---------- Рендер размеров ----------
+  function renderSizes(sizes) {
+    sizesEl.innerHTML = '';
+
+    const keys = Object.keys(sizes); // ["s", "m", "l"]
+    if (!keys.length) {
+      sizeGroup.setAttribute('hidden', '');
+      currentSize = null;
+      return;
+    }
+
+    sizeGroup.removeAttribute('hidden');
+
+    keys.forEach((key, i) => {
+      const item = sizes[key];
+      const btn = document.createElement('button');
+      btn.type = 'button';
+      btn.className = 'modal__option';
+      btn.dataset.label = (i + 1); // 1, 2, 3
+      btn.dataset.value = item.size;
+      btn.dataset.key   = key;
+      btn.dataset.addPrice = item['add-price'];
+      btn.textContent = item.size;
+
+      btn.addEventListener('click', () => {
+        // снять активность со всех
+        sizesEl.querySelectorAll('.modal__option')
+              .forEach((b) => b.classList.remove('is-active'));
+        btn.classList.add('is-active');
+
+        // запомнить выбор
+        currentSize = {
+          key,
+          size: item.size,
+          addPrice: parseFloat(item['add-price']) || 0,
+        };
+        updateTotal();
+      });
+
+      // первый активен
+      if (i === 0) {
+        btn.classList.add('is-active');
+        currentSize = {
+          key,
+          size: item.size,
+          addPrice: parseFloat(item['add-price']) || 0,
+        };
+      }
+
+      sizesEl.appendChild(btn);
+    });
+  }
+
+  // ---------- Рендер добавок ----------
+  function renderAdditives(additives) {
+    addsEl.innerHTML = '';
+    selectedAdditives = [];
+
+    if (!additives || !additives.length) {
+      addGroup.setAttribute('hidden', '');
+      return;
+    }
+
+    addGroup.removeAttribute('hidden');
+
+    additives.forEach((item, i) => {
+      const btn = document.createElement('button');
+      btn.type = 'button';
+      btn.className = 'modal__option';
+      btn.dataset.label = (i + 1);
+      btn.dataset.value = item.name;
+      btn.textContent = item.name;
+
+      btn.addEventListener('click', () => {
+        btn.classList.toggle('is-active');
+
+        const addPrice = parseFloat(item['add-price']) || 0;
+
+        if (btn.classList.contains('is-active')) {
+          selectedAdditives.push({ name: item.name, addPrice });
+        } else {
+          selectedAdditives = selectedAdditives.filter((a) => a.name !== item.name);
+        }
+
+        updateTotal();
+      });
+
+      addsEl.appendChild(btn);
+    });
+  }
+
+  // ---------- Подсчёт итога ----------
+  function updateTotal() {
+    if (!currentProduct) return;
+
+    const base = parseFloat(currentProduct.price) || 0;
+    const sizeAdd = currentSize ? currentSize.addPrice : 0;
+    const addsSum = selectedAdditives.reduce((sum, a) => sum + a.addPrice, 0);
+
+    const total = base + sizeAdd + addsSum;
+    totalEl.textContent = `$${total.toFixed(2)}`;
   }
 
   // ---------- Закрытие ----------
@@ -81,90 +189,45 @@
     modal.classList.remove('is-open');
     document.body.classList.remove('no-scroll');
 
-    // После анимации — hidden
     setTimeout(() => {
       modal.setAttribute('hidden', '');
       if (lastFocused && lastFocused.focus) lastFocused.focus();
     }, 250);
   }
 
-  // ---------- Рендер опций (S/M/L и 1/2/3) ----------
-  function renderOptions(container, items, name, allowSingleSelection) {
-    container.innerHTML = '';
-
-    items.forEach((label, i) => {
-      const btn = document.createElement('button');
-      btn.type = 'button';
-      btn.className = 'modal__option';
-      btn.dataset.label = String(i + 1);   // номер 1, 2, 3
-      btn.dataset.value = label;
-      btn.dataset.group = name;
-      btn.textContent = label;
-
-      // активный по умолчанию
-      if (i === 0) btn.classList.add('is-active');
-
-      btn.addEventListener('click', () => {
-        if (allowSingleSelection) {
-          // снимаем активность со всех кнопок в этой группе
-          container.querySelectorAll('.modal__option').forEach((b) => b.classList.remove('is-active'));
-        } else {
-          // additives — переключаем только текущую
-          // (оставляем множественный выбор)
-          btn.classList.toggle('is-active');
-        }
-        btn.classList.add('is-active');
-        if (allowSingleSelection) btn.classList.add('is-active');
+  // ---------- Слушатели ----------
+  function bindListeners() {
+    // Клик по карточке
+    document.querySelectorAll('[data-modal-open]').forEach((card) => {
+      card.addEventListener('click', (e) => {
+        if (e.target.closest('a, button')) return;
+        open(card);
       });
 
-      container.appendChild(btn);
+      card.addEventListener('keydown', (e) => {
+        if (e.key === 'Enter' || e.key === ' ') {
+          e.preventDefault();
+          open(card);
+        }
+      });
+    });
+
+    // Клик по оверлею / кнопкам закрытия
+    modal.addEventListener('click', (e) => {
+      if (e.target.closest('[data-modal-close]')) close();
+    });
+
+    // Escape
+    document.addEventListener('keydown', (e) => {
+      if (e.key === 'Escape' && modal.classList.contains('is-open')) close();
     });
   }
 
-  // ---------- helpers ----------
-  function parsePrice(str) {
-    const n = parseFloat(String(str || '').replace(/[^0-9.]/g, ''));
-    return isNaN(n) ? 0 : n;
+  // ---------- Старт ----------
+  async function init() {
+    await loadProducts();
+    bindListeners();
   }
 
-  function safeParse(str) {
-    if (!str) return [];
-    try { return JSON.parse(str); } catch { return []; }
-  }
-
-  // ---------- Слушатели ----------
-  // Открытие: клик по любой части карточки
-  document.querySelectorAll('[data-modal-open]').forEach((card) => {
-    card.addEventListener('click', (e) => {
-      // не открывать, если клик по кнопке внутри карточки (если такие появятся)
-      if (e.target.closest('a, button')) return;
-      open(card);
-    });
-
-    // Открытие с клавиатуры (Enter / Space)
-    card.addEventListener('keydown', (e) => {
-      if (e.key === 'Enter' || e.key === ' ') {
-        e.preventDefault();
-        open(card);
-      }
-    });
-  });
-
-  // Закрытие: клик по оверлею или по элементам с data-modal-close
-  modal.addEventListener('click', (e) => {
-    if (e.target.closest('[data-modal-close]')) {
-      close();
-    }
-  });
-
-  // Закрытие: Escape
-  document.addEventListener('keydown', (e) => {
-    if (e.key === 'Escape' && modal.classList.contains('is-open')) {
-      close();
-    }
-  });
-
-  // Клик внутри окна — не закрывает
-  // (обработчик выше срабатывает только по [data-modal-close] или оверлею,
-  //  а оверлей — это отдельный слой, а не .modal__window)
+  init();
 })();
