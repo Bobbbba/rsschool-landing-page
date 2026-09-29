@@ -109,7 +109,7 @@
     width: 44px;
     height: 44px;
     border-radius: 50%;
-    border: 1px solid var(--color-border-soft);
+    border: 1px solid var(--color-text);
     background: transparent;
     color: $color-text;
     padding: 0 ;
@@ -154,7 +154,7 @@
       opacity: 0;
     }
     .header__burger-line--bottom {
-      transform:translateX(0px) translateY(-5px) rotate(-45deg);
+      transform:translateX(0px) translateY(-6px) rotate(-45deg);
     }
   }
   }
@@ -260,14 +260,15 @@
   &__list {
     flex-direction: column;
     align-items: center;       // ← по левому краю
-    gap: 20px;                      // ← уменьшить с 28–40 до 20
+    gap: 60px;                      // ← уменьшить с 28–40 до 20
   }
 
   &__link {
-    font-size: 24px;                // ← не 30+
+    font-size: 32px;                // ← не 30+
     font-weight: $fw-regular;       // ← не medium/semibold
-    line-height: 1.3;
+    line-height: 1.25;
     color: $color-text;
+    font-weight: 600;
     text-align: left;
     // убираем подчёркивание-анимацию на мобиле:
     &::after { display: none; }

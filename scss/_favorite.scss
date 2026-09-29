@@ -155,12 +155,12 @@
     height: 4px;
     padding: 0;
     border: none;
-    background: $color-footer;
+    background: $slider-dot-bg;
     border-radius: 2px;
     cursor: pointer;
     transition: background .2s ease;
 
-    &.is-active { background:  var(--slider-dot-bg-active); }
+    &.is-active { background:  var( --slider-dot-bg-active); }
 
     &:focus-visible {
       outline: 2px solid $color-accent;

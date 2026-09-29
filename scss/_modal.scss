@@ -302,7 +302,7 @@
       max-height: calc(100vh - 24px);
     }
 
-    &__img-wrap { max-height: 200px; }
+    &__img-wrap { display: none; }
     &__img { height: 200px; }
 
     &__content { padding: 20px; }
