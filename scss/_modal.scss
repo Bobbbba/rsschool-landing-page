@@ -32,7 +32,7 @@
   }
 
   // ---------- Окно ----------
-  &__window {
+   &__window {
     position: relative;
     z-index: 1;
     width: 100%;
@@ -41,12 +41,8 @@
     background: $color-bg;
     color: $color-text;
     border-radius: 40px;
-    overflow: hidden;
-    overflow-y: auto;
+    overflow: hidden;              // ← обрезает картинку по радиусу окна
     box-shadow: 0 24px 60px rgba(0, 0, 0, .25);
-    transform: translateY(20px) scale(.98);
-    opacity: 0;
-    transition: transform .3s ease, opacity .3s ease;
   }
 
   &.is-open &__window {
@@ -56,6 +52,7 @@
 
   // ---------- Кнопка закрытия (крестик) ----------
   &__close {
+    
     position: absolute;
     top: 20px;
     right: 20px;
@@ -88,23 +85,30 @@
   &__body {
     display: grid;
     grid-template-columns: 340px 1fr;
+    padding: 16px;
     gap: 0;
   }
 
   &__img-wrap {
-    background: rgba($color-text, .04);
-    overflow: hidden;
-  }
+  max-width: 310px;
+  width: 100%;
+  align-self: flex-start;
+  border-radius: 40px;
+  position: relative;
+  overflow: hidden;
+               // ← фиксированная высота
+}
 
-  &__img {
-    width: 100%;
-    height: 100%;
-    object-fit: cover;
-    display: block;
-  }
+&__img {
+  display: block;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: center top;   // ← выравнивание по верхнему краю
+}
 
   &__content {
-    padding: 40px 40px 40px 40px;
+    padding: 10px 40px 10px 40px;
     display: flex;
     flex-direction: column;
   }
@@ -140,7 +144,7 @@
 
   &__options {
     display: flex;
-    flex-wrap: wrap;
+    flex-wrap: nowrap;
     gap: 8px;
   }
 
