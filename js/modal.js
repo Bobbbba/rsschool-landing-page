@@ -99,7 +99,8 @@
       const btn = document.createElement('button');
       btn.type = 'button';
       btn.className = 'modal__option';
-      btn.dataset.label = (i + 1); // 1, 2, 3
+     const sizeLabels = ['S', 'M', 'L'];
+    btn.dataset.label = sizeLabels[i] || String(i + 1);
       btn.dataset.value = item.size;
       btn.dataset.key   = key;
       btn.dataset.addPrice = item['add-price'];
