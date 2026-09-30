@@ -1715,11 +1715,13 @@ body.no-scroll {
     padding: 20px;
   }
   .modal__window {
-    max-width: 640px;
+    max-width: 656px;
     border-radius: 32px;
   }
   .modal__body {
-    grid-template-columns: 1fr;
+    grid-template-columns: 260px 1fr;
+    align-items: stretch;
+    padding: 0;
   }
   .modal__img-wrap {
     max-height: 280px;
@@ -1728,8 +1730,11 @@ body.no-scroll {
     height: 280px;
     object-fit: cover;
   }
+  .modal__options {
+    flex-wrap: wrap;
+  }
   .modal__content {
-    padding: 28px 28px 28px 28px;
+    padding: 28px 15px 28px 15px;
   }
   .modal__title {
     font-size: 26px;
@@ -1744,6 +1749,10 @@ body.no-scroll {
 @media (max-width: 380px) {
   .modal {
     padding: 12px;
+  }
+  .modal__body {
+    grid-template-columns: 1fr;
+    padding: 0;
   }
   .modal__window {
     max-width: 100%;
