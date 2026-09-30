@@ -767,9 +767,6 @@ body.no-scroll {
     gap: 16px;
     padding-bottom: 60px;
   }
-  .slider__btn {
-    display: none;
-  }
   .slider__img {
     width: 260px;
     height: 340px;
@@ -794,6 +791,7 @@ body.no-scroll {
     padding: 0 8px;
   }
   .slider__btn {
+    display: none;
     width: 36px;
     height: 36px;
   }
