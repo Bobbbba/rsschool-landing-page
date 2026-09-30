@@ -173,13 +173,7 @@
     gap: 16px;
     padding-bottom: 60px;
 
-    &__btn {
-      display: none;
-      
-
-      
-    }
-
+    
     &__img {
       width: 260px;
       height: 340px;
@@ -200,6 +194,7 @@
     &__slide { padding: 0 8px; }
 
     &__btn {
+      display: none;
       width: 36px;
       height: 36px;
 
