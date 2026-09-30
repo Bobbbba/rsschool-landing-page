@@ -268,12 +268,14 @@
     padding: 20px;
 
     &__window {
-      max-width: 640px;
+      max-width: 656px;
       border-radius: 32px;
     }
 
     &__body {
-      grid-template-columns: 1fr;
+     grid-template-columns: 260px 1fr;   // картинка уже, чем на 1440
+    align-items: stretch;
+    padding: 0;
     }
 
     &__img-wrap {
@@ -284,9 +286,12 @@
       height: 280px;
       object-fit: cover;
     }
+    &__options {
+        flex-wrap: wrap ;
+    }
 
     &__content {
-      padding: 28px 28px 28px 28px;
+      padding: 28px 15px 28px 15px;
     }
 
     &__title { font-size: 26px; }
@@ -299,6 +304,12 @@
   // ==========================================================
   @include mobile {
     padding: 12px;
+
+    &__body {
+     grid-template-columns: 1fr;   // картинка уже, чем на 1440
+    
+    padding: 0;
+    }
 
     &__window {
       max-width: 100%;
