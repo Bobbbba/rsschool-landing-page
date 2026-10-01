@@ -7,9 +7,9 @@
   // Сопоставление категории → путь к папке с картинками
   // (если у вас структура img/menu/coffee/irish-coffee.png)
   const IMG_BASE = {
-    coffee:  'img/menu/coffee/',
-    tea:     'img/menu/tea/',
-    dessert: 'img/menu/dessert/',
+    coffee:  './img/menu/coffee/',
+    tea:     './img/menu/tea/',
+    dessert: './img/menu/dessert/',
   };
 
   // Функция slug из имени: "Irish coffee" → "irish-coffee"
