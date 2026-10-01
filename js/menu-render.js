@@ -29,7 +29,8 @@
     li.dataset.modalOpen = '';
     li.dataset.name = product.name;      // ← только имя, остальное в JSON
 
-    const imgSrc = IMG_BASE[product.category] + slugify(product.name) + '.png';
+      const imgSrc = IMG_BASE[product.category] + slugify(product.name) + '.png';
+      console.log(imgSrc)
 
     li.innerHTML = `
       <div class="menu-card__img-wrap">
